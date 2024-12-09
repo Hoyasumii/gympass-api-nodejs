@@ -1,6 +1,7 @@
 import fastify from "fastify";
 import dotenv from "dotenv";
 import { getLogger } from "@/utils";
+import routes from "./http/routes";
 
 if (!process.env.NODE_ENV) {
   dotenv.config();
@@ -11,5 +12,7 @@ if (!process.env.NODE_ENV) {
 const app = fastify({
   logger: getLogger(process.env.NODE_ENV),
 });
+
+app.register(routes);
 
 export default app;

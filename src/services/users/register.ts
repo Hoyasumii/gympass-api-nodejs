@@ -1,6 +1,6 @@
 import { Users } from "@/repositories";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
-import { hash } from "bcryptjs";
+import bcrypt from "bcryptjs";
 
 interface Register {
   email: string;
@@ -9,7 +9,7 @@ interface Register {
 }
 
 export async function register({ email, name, password }: Register) {
-  const hashedPassword = await hash(password, 6);
+  const hashedPassword = await bcrypt.hash(password, 6);
 
   try {
     await Users.create({
