@@ -1,4 +1,4 @@
-import { prisma } from "@/utils";
+import { Users } from "@/repositories";
 import { PrismaClientKnownRequestError } from "@prisma/client/runtime/library";
 import { hash } from "bcryptjs";
 
@@ -12,12 +12,10 @@ export async function register({ email, name, password }: Register) {
   const hashedPassword = await hash(password, 6);
 
   try {
-    await prisma.user.create({
-      data: {
-        name,
-        email,
-        password: hashedPassword,
-      },
+    await Users.create({
+      name,
+      email,
+      password: hashedPassword,
     });
   } catch (error: unknown) {
     const { code } = error as PrismaClientKnownRequestError;
