@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { makeUsersAuthenticateUC } from "@/useCases/factories";
+import { makeUsersAuthenticateUC } from "@/use-cases/factories";
 import { z } from "zod";
 
 export async function authenticate(

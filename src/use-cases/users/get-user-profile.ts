@@ -1,7 +1,7 @@
 import { IUsersRepository } from "@/repositories";
 import { User } from "@/types";
-import { UseCaseInterface } from "@/useCases";
-import { ResourceNotFoundError } from "@/useCases/errors";
+import { UseCaseInterface } from "@/use-cases";
+import { ResourceNotFoundError } from "@/use-cases/errors";
 
 interface IGetUserProfile {
   id: string;

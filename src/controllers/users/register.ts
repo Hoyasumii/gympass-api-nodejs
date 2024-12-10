@@ -1,5 +1,5 @@
 import { FastifyReply, FastifyRequest } from "fastify";
-import { makeUsersRegisterUC } from "@/useCases/factories";
+import { makeUsersRegisterUC } from "@/use-cases/factories";
 import { z } from "zod";
 
 export async function register(request: FastifyRequest, reply: FastifyReply) {

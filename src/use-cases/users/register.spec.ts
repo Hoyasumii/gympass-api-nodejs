@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { Register } from "./register";
 import { UsersRepository } from "@/repositories/in-memory";
-import { UserAlreadyExistsError } from "@/useCases/errors";
+import { UserAlreadyExistsError } from "@/use-cases/errors";
 import { isBcryptHash } from "@/utils";
 
 let repository: UsersRepository;

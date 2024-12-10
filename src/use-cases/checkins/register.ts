@@ -1,6 +1,6 @@
 import { CheckInsRepositoryInterface } from "@/repositories";
 import { CheckIn } from "@/types";
-import { UseCaseInterface } from "@/useCases";
+import { UseCaseInterface } from "@/use-cases";
 
 interface IRegister {
   gymId: string;

@@ -1,5 +1,5 @@
 import { UsersRepository } from "@/repositories/prisma";
-import { users } from "@/useCases";
+import { users } from "@/use-cases";
 
 export function makeUsersAuthenticateUC() {
   const usersRepository = new UsersRepository();

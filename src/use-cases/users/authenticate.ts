@@ -1,6 +1,6 @@
 import { IUsersRepository } from "@/repositories";
-import { UseCaseInterface } from "@/useCases";
-import { InvalidCredentialsError } from "@/useCases/errors";
+import { UseCaseInterface } from "@/use-cases";
+import { InvalidCredentialsError } from "@/use-cases/errors";
 import bcrypt from "bcryptjs";
 
 type Authentication = {
