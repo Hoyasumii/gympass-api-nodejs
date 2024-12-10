@@ -19,8 +19,8 @@ export class Authenticate
     if (!user) throw new InvalidCredentialsError();
 
     const doesPasswordMatches = await bcrypt.compare(password, user.password);
-
-    if (doesPasswordMatches) throw new InvalidCredentialsError();
+    
+    if (!doesPasswordMatches) throw new InvalidCredentialsError();
 
     return true;
   }
