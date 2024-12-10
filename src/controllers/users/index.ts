@@ -1,3 +1,4 @@
 import { register } from "./register";
+import { authenticate } from "./authenticate";
 
-export default { register } as const;
+export default { register, authenticate } as const;
