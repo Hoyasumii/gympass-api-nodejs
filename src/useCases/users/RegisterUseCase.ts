@@ -11,7 +11,7 @@ interface Register {
 export class RegisterUseCase {
   constructor(private usersRepository: IUsersRepository) {}
 
-  public async run({ email, name, password }: Register) {
+  public async run({ email, name, password }: Register): Promise<Register> {
     const hashedPassword = await bcrypt.hash(password, 6);
 
     if (await this.usersRepository.findByEmail(email)) {
@@ -23,5 +23,11 @@ export class RegisterUseCase {
       name,
       password: hashedPassword,
     });
+
+    return {
+      email,
+      name,
+      password: hashedPassword,
+    };
   }
 }
