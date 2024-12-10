@@ -1,3 +1,3 @@
-export { getLogger } from "./getLogger";
+export { getLogger } from "./get-logger";
 export { prisma } from "./prisma";
-export { isBcryptHash } from "./isBcryptHash";
+export { isBcryptHash } from "./is-bcrypt-hash";
