@@ -1,14 +1,19 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { Register } from "./Register";
 import { UsersRepository } from "@/repositories/inMemory";
 import { UserAlreadyExistsError } from "./errors";
 import { isBcryptHash } from "@/utils";
 
-describe("Register Use Case", () => {
-  it("should to register", async () => {
-    const usersRepository = new UsersRepository();
-    const registerUseCase = new Register(usersRepository);
+let usersRepository: UsersRepository;
+let registerUseCase: Register;
 
+describe("Register Use Case", () => {
+  beforeEach(() => {
+    usersRepository = new UsersRepository();
+    registerUseCase = new Register(usersRepository);
+  });
+
+  it("should to register", async () => {
     const { email } = await registerUseCase.run({
       name: "John Doe",
       email: "account@email.com",
@@ -19,9 +24,6 @@ describe("Register Use Case", () => {
   });
 
   it("should hash user password upon registration", async () => {
-    const usersRepository = new UsersRepository();
-    const registerUseCase = new Register(usersRepository);
-
     const { password } = await registerUseCase.run({
       name: "John Doe",
       email: "account@email.com",
@@ -34,9 +36,6 @@ describe("Register Use Case", () => {
   });
 
   it("should not be able to register with same email twice", async () => {
-    const usersRepository = new UsersRepository();
-    const registerUseCase = new Register(usersRepository);
-
     await registerUseCase.run({
       name: "John Doe",
       email: "account@email.com",

@@ -1,14 +1,19 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, beforeEach } from "vitest";
 import { UsersRepository } from "@/repositories/inMemory";
 import { InvalidCredentialsError } from "./errors";
 import { Authenticate } from "./Authenticate";
-import bcrypt from 'bcryptjs';
+import bcrypt from "bcryptjs";
+
+let repository: UsersRepository;
+let authenticateUseCase: Authenticate;
 
 describe("Authenticate Use Case", () => {
-  it("should to authenticate a user", async () => {
-    const repository = new UsersRepository();
-    const authenticateUseCase = new Authenticate(repository);
+  beforeEach(() => {
+    repository = new UsersRepository();
+    authenticateUseCase = new Authenticate(repository);
+  });
 
+  it("should to authenticate a user", async () => {
     await repository.create({
       name: "John Doe",
       email: "account@email.com",
@@ -24,9 +29,6 @@ describe("Authenticate Use Case", () => {
   });
 
   it("should reject invalid authentication", async () => {
-    const repository = new UsersRepository();
-    const authenticateUseCase = new Authenticate(repository);
-
     await repository.create({
       name: "John Doe",
       email: "account@email.com",
