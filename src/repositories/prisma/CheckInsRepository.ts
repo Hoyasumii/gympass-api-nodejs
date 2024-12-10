@@ -14,4 +14,11 @@ export class CheckInsRepository implements ICheckInsRepository {
       },
     });
   }
+
+  async findByUserIdOnDate(
+    _userId: string,
+    _date: Date
+  ): Promise<CheckIn | null> {
+    return null;
+  }
 }

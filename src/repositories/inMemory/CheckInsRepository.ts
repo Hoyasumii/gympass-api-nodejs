@@ -23,4 +23,17 @@ export class CheckInsRepository
 
     return checkInContent;
   }
+
+  async findByUserIdOnDate(
+    userId: string,
+    _date: Date
+  ): Promise<CheckIn | null> {
+    const checkInOnSameDate = this.items.find(
+      (item) => item.user_id === userId
+    );
+
+    if (!checkInOnSameDate) return null;
+
+    return checkInOnSameDate;
+  }
 }
