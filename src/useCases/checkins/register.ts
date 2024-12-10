@@ -1,6 +1,6 @@
-import { ICheckInsRepository } from "@/repositories";
+import { CheckInsRepositoryInterface } from "@/repositories";
 import { CheckIn } from "@/types";
-import { IUseCase } from "@/useCases";
+import { UseCaseInterface } from "@/useCases";
 
 interface IRegister {
   gymId: string;
@@ -8,9 +8,9 @@ interface IRegister {
 }
 
 export class Register
-  implements IUseCase<ICheckInsRepository, IRegister, CheckIn>
+  implements UseCaseInterface<CheckInsRepositoryInterface, IRegister, CheckIn>
 {
-  constructor(public repository: ICheckInsRepository) {}
+  constructor(public repository: CheckInsRepositoryInterface) {}
 
   async run({ gymId, userId }: IRegister): Promise<CheckIn> {
     const checkInOnSameDay = await this.repository.findByUserIdOnDate(

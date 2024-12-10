@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { UsersRepository } from "@/repositories/inMemory";
+import { UsersRepository } from "@/repositories/in-memory";
 import { ResourceNotFoundError } from "@/useCases/errors";
-import { GetUserProfile } from "./GetUserProfile";
+import { GetUserProfile } from "./get-user-profile";
 
 let repository: UsersRepository;
 let useCase: GetUserProfile;

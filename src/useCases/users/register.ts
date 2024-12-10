@@ -1,7 +1,7 @@
 import { type IUsersRepository } from "@/repositories";
 import bcrypt from "bcryptjs";
 import { UserAlreadyExistsError } from "@/useCases/errors";
-import { IUseCase } from "@/useCases";
+import { UseCaseInterface } from "@/useCases";
 
 interface IRegister {
   email: string;
@@ -10,7 +10,7 @@ interface IRegister {
 }
 
 export class Register
-  implements IUseCase<IUsersRepository, IRegister, IRegister>
+  implements UseCaseInterface<IUsersRepository, IRegister, IRegister>
 {
   constructor(public repository: IUsersRepository) {}
 

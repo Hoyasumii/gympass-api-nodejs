@@ -1,6 +1,6 @@
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
-import { Register } from "./Register";
-import { CheckInsRepository } from "@/repositories/inMemory";
+import { Register } from "./register";
+import { CheckInsRepository } from "@/repositories/in-memory";
 
 let repository: CheckInsRepository;
 let useCase: Register;

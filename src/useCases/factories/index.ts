@@ -1,3 +1,3 @@
-export { makeUsersAuthenticateUC } from "./makeUsersAuthenticateUC";
-export { makeUsersRegisterUC } from "./makeUsersRegisterUC";
-export { makeUsersGetUserProfileUC } from "./makeUsersGetUserProfileUC";
+export { makeUsersAuthenticateUC } from "./make-users-authenticate";
+export { makeUsersRegisterUC } from "./make-users-register";
+export { makeUsersGetUserProfileUC } from "./make-users-get-profile";

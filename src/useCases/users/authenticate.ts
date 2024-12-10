@@ -1,5 +1,5 @@
 import { IUsersRepository } from "@/repositories";
-import { IUseCase } from "@/useCases";
+import { UseCaseInterface } from "@/useCases";
 import { InvalidCredentialsError } from "@/useCases/errors";
 import bcrypt from "bcryptjs";
 
@@ -9,7 +9,7 @@ type Authentication = {
 };
 
 export class Authenticate
-  implements IUseCase<IUsersRepository, Authentication, true>
+  implements UseCaseInterface<IUsersRepository, Authentication, true>
 {
   constructor(public repository: IUsersRepository) {}
 

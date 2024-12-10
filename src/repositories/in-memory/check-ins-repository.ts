@@ -1,9 +1,9 @@
-import { ICheckInsRepository, IInMemoryRepository } from "@/repositories";
+import { CheckInsRepositoryInterface, IInMemoryRepository } from "@/repositories";
 import { CheckIn } from "@/types";
 import { randomUUID } from "node:crypto";
 
 export class CheckInsRepository
-  implements ICheckInsRepository, IInMemoryRepository<CheckIn>
+  implements CheckInsRepositoryInterface, IInMemoryRepository<CheckIn>
 {
   items: Array<CheckIn> = [];
 

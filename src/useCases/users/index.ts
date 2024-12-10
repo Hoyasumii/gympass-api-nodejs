@@ -1,6 +1,6 @@
-import { Register } from "./Register";
-import { Authenticate } from "./Authenticate";
-import { GetUserProfile } from "./GetUserProfile";
+import { Register } from "./register";
+import { Authenticate } from "./authenticate";
+import { GetUserProfile } from "./get-user-profile";
 
 export default {
   Register,

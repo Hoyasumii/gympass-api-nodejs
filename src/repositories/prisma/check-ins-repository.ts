@@ -1,8 +1,8 @@
-import { ICheckInsRepository } from "@/repositories";
+import { CheckInsRepositoryInterface } from "@/repositories";
 import { CheckIn } from "@/types";
 import { prisma } from "@/utils";
 
-export class CheckInsRepository implements ICheckInsRepository {
+export class CheckInsRepository implements CheckInsRepositoryInterface {
   async create({
     gym_id,
     user_id,

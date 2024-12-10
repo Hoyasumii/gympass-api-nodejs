@@ -1,6 +1,6 @@
 import { IUsersRepository } from "@/repositories";
 import { User } from "@/types";
-import { IUseCase } from "@/useCases";
+import { UseCaseInterface } from "@/useCases";
 import { ResourceNotFoundError } from "@/useCases/errors";
 
 interface IGetUserProfile {
@@ -8,7 +8,7 @@ interface IGetUserProfile {
 }
 
 export class GetUserProfile
-  implements IUseCase<IUsersRepository, IGetUserProfile, User>
+  implements UseCaseInterface<IUsersRepository, IGetUserProfile, User>
 {
   constructor(public repository: IUsersRepository) {}
 

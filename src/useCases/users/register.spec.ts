@@ -1,6 +1,6 @@
 import { describe, it, expect, beforeEach } from "vitest";
-import { Register } from "./Register";
-import { UsersRepository } from "@/repositories/inMemory";
+import { Register } from "./register";
+import { UsersRepository } from "@/repositories/in-memory";
 import { UserAlreadyExistsError } from "@/useCases/errors";
 import { isBcryptHash } from "@/utils";
 
