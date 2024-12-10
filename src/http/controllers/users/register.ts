@@ -21,16 +21,10 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
 
   const { email, name, password } = data;
 
-  try {
-    const usersRepository = new UsersRepository();
-    const createUserUseCase = new users.RegisterUseCase(usersRepository);
+  const usersRepository = new UsersRepository();
+  const createUserUseCase = new users.RegisterUseCase(usersRepository);
 
-    await createUserUseCase.run({ email, name, password });
-  } catch (err: unknown) {
-    const error = err as Error;
-
-    return reply.status(409).send(error.message);
-  }
+  await createUserUseCase.run({ email, name, password });
 
   return reply.status(201).send();
 }
