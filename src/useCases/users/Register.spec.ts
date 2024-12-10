@@ -7,7 +7,7 @@ import { isBcryptHash } from "@/utils";
 let repository: UsersRepository;
 let useCase: Register;
 
-describe("Register Use Case", () => {
+describe("User Register Use Case", () => {
   beforeEach(() => {
     repository = new UsersRepository();
     useCase = new Register(repository);

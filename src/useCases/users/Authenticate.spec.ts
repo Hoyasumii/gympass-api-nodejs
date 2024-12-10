@@ -7,7 +7,7 @@ import bcrypt from "bcryptjs";
 let repository: UsersRepository;
 let useCase: Authenticate;
 
-describe("Authenticate Use Case", () => {
+describe("User Authenticate Use Case", () => {
   beforeEach(() => {
     repository = new UsersRepository();
     useCase = new Authenticate(repository);
