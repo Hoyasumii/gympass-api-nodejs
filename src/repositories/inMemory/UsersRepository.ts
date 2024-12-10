@@ -6,8 +6,8 @@ export class UsersRepository
 {
   public items: Array<User> = [];
 
-  async findByEmail(email: string): Promise<boolean> {
-    return this.items.findIndex(item => item.email === email) !== -1;
+  async findByEmail(email: string): Promise<User | undefined> {
+    return this.items.find(item => item.email === email);
   }
 
   async create(data: Prisma.UserCreateInput): Promise<User> {

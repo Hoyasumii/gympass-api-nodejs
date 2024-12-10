@@ -10,19 +10,10 @@ export async function register(request: FastifyRequest, reply: FastifyReply) {
     password: z.string().min(6),
   });
 
-  const { data, error } = registerBodySchema.safeParse(request.body);
-
-  if (error) {
-    return reply.status(400).send({
-      message: `🚫 Bad Request at ${request.url}(${request.method})`,
-      cause: error.issues,
-    });
-  }
-
-  const { email, name, password } = data;
+  const { email, name, password } = registerBodySchema.parse(request.body);
 
   const usersRepository = new UsersRepository();
-  const createUserUseCase = new users.RegisterUseCase(usersRepository);
+  const createUserUseCase = new users.Register(usersRepository);
 
   await createUserUseCase.run({ email, name, password });
 

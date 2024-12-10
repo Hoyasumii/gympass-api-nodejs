@@ -1,4 +1,4 @@
-import { users } from "@/http/controllers/index";
+import { users } from "@/controllers/index";
 import { FastifyInstance } from "fastify";
 
 export async function usersRoute(app: FastifyInstance) {

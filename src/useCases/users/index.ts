@@ -1,5 +1,5 @@
-import { RegisterUseCase } from "./RegisterUseCase";
+import { Register } from "./Register";
 
 export default {
-  RegisterUseCase,
+  Register,
 } as const;

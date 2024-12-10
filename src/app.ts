@@ -1,7 +1,7 @@
 import fastify from "fastify";
 import dotenv from "dotenv";
 import { getLogger } from "@/utils";
-import routes from "./http/routes";
+import routes from "./routes";
 import { ZodError } from "zod";
 
 if (!process.env.NODE_ENV) {
@@ -23,13 +23,9 @@ app.setErrorHandler((error, _, reply) => {
       .send({ message: "Validation error.", issues: error.format() });
   }
 
-  if (process.env.NODE_ENV !== "production") {
-    console.error(error);
-  } else {
-    // TODO: We should log to a external tool like DataLog
-  }
-
-  return reply.status(500).send({ message: "Internal server error." });
+  return reply
+    .status(error.statusCode || 500)
+    .send({ code: error.code, message: error.message });
 });
 
 export default app;

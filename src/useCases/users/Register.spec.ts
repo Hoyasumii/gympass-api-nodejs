@@ -1,13 +1,13 @@
 import { describe, it, expect } from "vitest";
-import { RegisterUseCase } from "./RegisterUseCase";
+import { Register } from "./Register";
 import { UsersRepository } from "@/repositories/inMemory";
-import { compare } from "bcryptjs";
-import { UserAlreadyExistsError } from "@/useCases/errors";
+import { UserAlreadyExistsError } from "./errors";
+import { isBcryptHash } from "@/utils";
 
 describe("Register Use Case", () => {
   it("should to register", async () => {
     const usersRepository = new UsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
+    const registerUseCase = new Register(usersRepository);
 
     const { email } = await registerUseCase.run({
       name: "John Doe",
@@ -20,7 +20,7 @@ describe("Register Use Case", () => {
 
   it("should hash user password upon registration", async () => {
     const usersRepository = new UsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
+    const registerUseCase = new Register(usersRepository);
 
     const { password } = await registerUseCase.run({
       name: "John Doe",
@@ -28,14 +28,14 @@ describe("Register Use Case", () => {
       password: "123456",
     });
 
-    const comparePassword = await compare("123456", password);
+    const comparePassword = isBcryptHash(password);
 
     expect(comparePassword).toBeTruthy();
   });
 
   it("should not be able to register with same email twice", async () => {
     const usersRepository = new UsersRepository();
-    const registerUseCase = new RegisterUseCase(usersRepository);
+    const registerUseCase = new Register(usersRepository);
 
     await registerUseCase.run({
       name: "John Doe",
@@ -43,12 +43,12 @@ describe("Register Use Case", () => {
       password: "123456",
     });
 
-    expect(async () => {
-      await registerUseCase.run({
+    await expect(
+      registerUseCase.run({
         name: "John Doe",
         email: "account@email.com",
         password: "123456",
-      });
-    }).rejects.toBeInstanceOf(UserAlreadyExistsError);
+      })
+    ).rejects.toBeInstanceOf(UserAlreadyExistsError);
   });
 });
