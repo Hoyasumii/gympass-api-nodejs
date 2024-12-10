@@ -1,5 +1,6 @@
 import { IInMemoryRepository, IUsersRepository } from "@/repositories";
-import { Prisma, User } from "@prisma/client";
+import { User } from "@/types";
+import { randomUUID } from "node:crypto";
 
 export class UsersRepository
   implements IUsersRepository, IInMemoryRepository<User>
@@ -7,18 +8,22 @@ export class UsersRepository
   public items: Array<User> = [];
 
   async findByEmail(email: string): Promise<User | undefined> {
-    return this.items.find(item => item.email === email);
+    return this.items.find((item) => item.email === email);
   }
 
-  async create(data: Prisma.UserCreateInput): Promise<User> {
-    const { email, name, password, created_at, id } = data;
+  async findById(id: string): Promise<User | null> {
+    return this.items.find((item) => item.id === id) || null;
+  }
+
+  async create(data: Omit<User, "id" | "created_at">): Promise<User> {
+    const { email, name, password } = data;
 
     const userContent: User = {
       email,
       name,
       password,
-      id: id || "id",
-      created_at: created_at as Date,
+      id: randomUUID(),
+      created_at: new Date(),
     };
 
     this.items.push(userContent);

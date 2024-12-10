@@ -1,16 +1,16 @@
 import { describe, it, expect, beforeEach } from "vitest";
 import { UsersRepository } from "@/repositories/inMemory";
-import { InvalidCredentialsError } from "./errors";
+import { InvalidCredentialsError } from "@/useCases/errors";
 import { Authenticate } from "./Authenticate";
 import bcrypt from "bcryptjs";
 
 let repository: UsersRepository;
-let authenticateUseCase: Authenticate;
+let useCase: Authenticate;
 
 describe("Authenticate Use Case", () => {
   beforeEach(() => {
     repository = new UsersRepository();
-    authenticateUseCase = new Authenticate(repository);
+    useCase = new Authenticate(repository);
   });
 
   it("should to authenticate a user", async () => {
@@ -21,7 +21,7 @@ describe("Authenticate Use Case", () => {
     });
 
     await expect(
-      authenticateUseCase.run({
+      useCase.run({
         email: "account@email.com",
         password: "123456",
       })
@@ -36,7 +36,7 @@ describe("Authenticate Use Case", () => {
     });
 
     await expect(
-      authenticateUseCase.run({
+      useCase.run({
         email: "johndoe@example.com",
         password: "123456",
       })

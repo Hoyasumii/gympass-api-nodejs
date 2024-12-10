@@ -1,6 +1,6 @@
 import { type IUsersRepository } from "@/repositories";
 import bcrypt from "bcryptjs";
-import { UserAlreadyExistsError } from "./errors";
+import { UserAlreadyExistsError } from "@/useCases/errors";
 import { IUseCase } from "@/useCases";
 
 interface IRegister {

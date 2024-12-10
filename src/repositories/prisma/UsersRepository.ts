@@ -1,14 +1,19 @@
-import { Prisma, User } from "@prisma/client";
 import { IUsersRepository } from "@/repositories";
+import { User } from "@/types";
 import { prisma } from "@/utils";
 
 export class UsersRepository implements IUsersRepository {
   async findByEmail(email: string): Promise<User | undefined> {
-    const accountExists = await prisma.user.findUnique({ where: { email } });
+    const userExists = await prisma.user.findUnique({ where: { email } });
 
-    return accountExists || undefined;
+    return userExists || undefined;
   }
-  async create(data: Prisma.UserCreateInput): Promise<User> {
+
+  async findById(id: string): Promise<User | null> {
+    return await prisma.user.findUnique({ where: { id } });
+  }
+
+  async create(data: Omit<User, "id" | "created_at">): Promise<User> {
     const user = await prisma.user.create({ data });
 
     return user;

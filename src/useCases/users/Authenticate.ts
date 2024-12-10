@@ -1,6 +1,6 @@
 import { IUsersRepository } from "@/repositories";
 import { IUseCase } from "@/useCases";
-import { InvalidCredentialsError } from "./errors";
+import { InvalidCredentialsError } from "@/useCases/errors";
 import bcrypt from "bcryptjs";
 
 type Authentication = {
@@ -19,7 +19,7 @@ export class Authenticate
     if (!user) throw new InvalidCredentialsError();
 
     const doesPasswordMatches = await bcrypt.compare(password, user.password);
-    
+
     if (!doesPasswordMatches) throw new InvalidCredentialsError();
 
     return true;
