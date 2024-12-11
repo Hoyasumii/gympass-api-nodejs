@@ -1,4 +1,4 @@
-import { type IUsersRepository } from "@/repositories";
+import { type UsersRepositoryInterface } from "@/repositories";
 import bcrypt from "bcryptjs";
 import { UserAlreadyExistsError } from "@/use-cases/errors";
 import { UseCaseInterface } from "@/use-cases";
@@ -10,9 +10,9 @@ interface IRegister {
 }
 
 export class Register
-  implements UseCaseInterface<IUsersRepository, IRegister, IRegister>
+  implements UseCaseInterface<UsersRepositoryInterface, IRegister, IRegister>
 {
-  constructor(public repository: IUsersRepository) {}
+  constructor(public repository: UsersRepositoryInterface) {}
 
   public async run({ email, name, password }: IRegister): Promise<IRegister> {
     const hashedPassword = await bcrypt.hash(password, 6);

@@ -1,9 +1,9 @@
-import { IInMemoryRepository, IUsersRepository } from "@/repositories";
+import { InMemoryRepositoryInterface, UsersRepositoryInterface } from "@/repositories";
 import { User } from "@/types";
 import { randomUUID } from "node:crypto";
 
 export class UsersRepository
-  implements IUsersRepository, IInMemoryRepository<User>
+  implements UsersRepositoryInterface, InMemoryRepositoryInterface<User>
 {
   public items: Array<User> = [];
 

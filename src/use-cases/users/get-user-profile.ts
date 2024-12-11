@@ -1,4 +1,4 @@
-import { IUsersRepository } from "@/repositories";
+import { UsersRepositoryInterface } from "@/repositories";
 import { User } from "@/types";
 import { UseCaseInterface } from "@/use-cases";
 import { ResourceNotFoundError } from "@/use-cases/errors";
@@ -8,9 +8,9 @@ interface IGetUserProfile {
 }
 
 export class GetUserProfile
-  implements UseCaseInterface<IUsersRepository, IGetUserProfile, User>
+  implements UseCaseInterface<UsersRepositoryInterface, IGetUserProfile, User>
 {
-  constructor(public repository: IUsersRepository) {}
+  constructor(public repository: UsersRepositoryInterface) {}
 
   async run({ id }: IGetUserProfile): Promise<User> {
     const user = await this.repository.findById(id);

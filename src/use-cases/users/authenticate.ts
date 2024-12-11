@@ -1,4 +1,4 @@
-import { IUsersRepository } from "@/repositories";
+import { UsersRepositoryInterface } from "@/repositories";
 import { UseCaseInterface } from "@/use-cases";
 import { InvalidCredentialsError } from "@/use-cases/errors";
 import bcrypt from "bcryptjs";
@@ -9,9 +9,9 @@ type Authentication = {
 };
 
 export class Authenticate
-  implements UseCaseInterface<IUsersRepository, Authentication, true>
+  implements UseCaseInterface<UsersRepositoryInterface, Authentication, true>
 {
-  constructor(public repository: IUsersRepository) {}
+  constructor(public repository: UsersRepositoryInterface) {}
 
   async run({ email, password }: Authentication): Promise<true> {
     const user = await this.repository.findByEmail(email);

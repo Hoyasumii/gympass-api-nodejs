@@ -1,26 +1,27 @@
 import {
   CheckInsRepositoryInterface,
-  IInMemoryRepository,
+  InMemoryRepositoryInterface,
 } from "@/repositories";
 import { CheckIn } from "@/types";
 import dayjs from "dayjs";
 import { randomUUID } from "node:crypto";
 
 export class CheckInsRepository
-  implements CheckInsRepositoryInterface, IInMemoryRepository<CheckIn>
+  implements CheckInsRepositoryInterface, InMemoryRepositoryInterface<CheckIn>
 {
   items: Array<CheckIn> = [];
 
   async create({
     gym_id,
     user_id,
-  }: Omit<CheckIn, "id" | "created_at" | "validated_at">): Promise<CheckIn> {
+    validated_at = null
+  }: Omit<CheckIn, "id" | "created_at">): Promise<CheckIn> {
     const checkInContent: CheckIn = {
       gym_id,
       user_id,
       id: randomUUID(),
       created_at: new Date(),
-      validated_at: null,
+      validated_at,
     };
 
     this.items.push(checkInContent);
