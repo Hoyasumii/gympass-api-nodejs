@@ -1,5 +1,9 @@
-import { CheckInsRepositoryInterface, IInMemoryRepository } from "@/repositories";
+import {
+  CheckInsRepositoryInterface,
+  IInMemoryRepository,
+} from "@/repositories";
 import { CheckIn } from "@/types";
+import dayjs from "dayjs";
 import { randomUUID } from "node:crypto";
 
 export class CheckInsRepository
@@ -26,11 +30,19 @@ export class CheckInsRepository
 
   async findByUserIdOnDate(
     userId: string,
-    _date: Date
+    date: Date
   ): Promise<CheckIn | null> {
-    const checkInOnSameDate = this.items.find(
-      (item) => item.user_id === userId
-    );
+    const startOfTheDay = dayjs(date).startOf("date").subtract(1, "second");
+    const endOfTheDay = dayjs(date).endOf("date").add(1, "second");
+
+    const checkInOnSameDate = this.items.find((item) => {
+      const checkInDate = dayjs(item.created_at);
+
+      const isOnSameDate =
+        checkInDate.isAfter(startOfTheDay) && checkInDate.isBefore(endOfTheDay);
+
+      return item.user_id === userId && isOnSameDate;
+    });
 
     if (!checkInOnSameDate) return null;
 

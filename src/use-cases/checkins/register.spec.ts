@@ -24,7 +24,7 @@ describe("Check-in Register Use Case", () => {
   });
 
   it("should not be able to check-in in twice in the same day", async () => {
-    vi.setSystemTime(new Date(2024, 11, 10, 0, 0, 0, 0));
+    vi.setSystemTime(new Date(2022, 0, 20));
 
     await useCase.run({ gymId: "gym-1", userId: "user-1" });
 
@@ -34,11 +34,11 @@ describe("Check-in Register Use Case", () => {
   });
 
   it("should be able to check-in in twice in different dates", async () => {
-    vi.setSystemTime(new Date(2023, 11, 10, 0, 0, 0, 0));
+    vi.setSystemTime(new Date(2023, 11, 10));
 
     await useCase.run({ gymId: "gym-1", userId: "user-1" });
 
-    vi.setSystemTime(new Date(2023, 11, 11, 0, 0, 0, 0));
+    vi.setSystemTime(new Date(2024, 11, 11));
 
     await expect(
       useCase.run({ gymId: "gym-1", userId: "user-1" })
