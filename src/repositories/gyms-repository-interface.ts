@@ -1,6 +1,4 @@
 import { Gym } from "@/types";
+import { Findable } from "./types";
 
-export interface GymsRepositoryInterface {
-  findById(id: string): Promise<Gym | undefined>;
-  // create(data: Gym): Promise<Gym>;
-}
+export type GymsRepositoryInterface = Findable<Gym>;
